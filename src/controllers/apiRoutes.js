@@ -13,7 +13,9 @@ router.post("/login", (req, res) => {
     const { username, password } = req.body;
     const user = await User.findOne({ username });
     if (!user) {
-      res.json({ message: "You are not signed up" });
+      res.json({
+        message: "You are not signed up or you have entered the wrong username",
+      });
       return;
     }
     const result = await bcrypt.compare(password, user.password);
@@ -28,6 +30,8 @@ router.post("/login", (req, res) => {
         .cookie("token", token, { maxAge: maxAge, httpOnly: true })
         .json({ message: "Successful login", redirect_url: "/user/" });
       return;
+    } else {
+      res.json({ message: "Incorrect password" });
     }
 
     console.log("Something very random happened");
@@ -38,7 +42,7 @@ router.post("/login", (req, res) => {
 });
 router.post("/signup", (req, res) => {
   mongoConn();
-  const { username, password, email } = req.body;
+  const { name, username, password, email } = req.body;
   try {
     const checkExistingUser = await User.findOne({ username, email });
     if (checkExistingUser) {
@@ -47,7 +51,7 @@ router.post("/signup", (req, res) => {
       });
       return;
     }
-    const newUser = new User({ username, password, email });
+    const newUser = new User({ name, username, password, email });
     await newUser.save();
     res.json({ message: "Successfully signed up" });
   } catch (err) {
