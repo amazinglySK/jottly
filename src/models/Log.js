@@ -8,6 +8,7 @@ const LogSchema = mongoose.Schema({
     default: nanoid.nanoid(8),
     type: String,
   },
+  author: { type: mongoose.SchemaTypes.ObjectId, ref: "User", required: true },
   date: Date,
 });
 

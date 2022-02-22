@@ -4,10 +4,11 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const mongoConn = require("../lib/mongoConn");
 const User = require("../models/User");
+require("dotenv").config();
 
 const maxAge = 3 * 60 * 60;
 
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
   mongoConn();
   try {
     const { username, password } = req.body;
@@ -19,28 +20,27 @@ router.post("/login", (req, res) => {
       return;
     }
     const result = await bcrypt.compare(password, user.password);
-    if (result === true) {
+    if (result == true) {
       console.log("User logged in 🏁");
       const token = jwt.sign(
         { username: user.username, user_id: user._id },
         process.env.JWT_SECRET,
-        { expiresIn: maxAge * 1000 }
+        { expiresIn: maxAge }
       );
       res
-        .cookie("token", token, { maxAge: maxAge, httpOnly: true })
+        .cookie("token", token, { maxAge: maxAge * 1000, httpOnly: true })
         .json({ message: "Successful login", redirect_url: "/user/" });
       return;
     } else {
       res.json({ message: "Incorrect password" });
+      return;
     }
-
-    console.log("Something very random happened");
   } catch (err) {
     console.log(err);
     res.json({ message: "something went wrong" });
   }
 });
-router.post("/signup", (req, res) => {
+router.post("/signup", async (req, res) => {
   mongoConn();
   const { name, username, password, email } = req.body;
   try {
@@ -51,9 +51,10 @@ router.post("/signup", (req, res) => {
       });
       return;
     }
-    const newUser = new User({ name, username, password, email });
+    const hashed_pwd = await bcrypt.hash(password, 10);
+    const newUser = new User({ name, username, password: hashed_pwd, email });
     await newUser.save();
-    res.json({ message: "Successfully signed up" });
+    res.json({ message: "Successfully signed up", redirect_url: "/login" });
   } catch (err) {
     console.log(err);
     res.json({ message: "something went wrong" });
