@@ -70,14 +70,53 @@ main {
   font-weight: bold;
 }
 .button-type {
+  text-align: center;
   font-family: var(--primary-font-style);
-  font-size: 2rem;
+  font-size: 1.5rem;
   background-color: var(--accent-color);
   color: var(--button-text-color);
   font-weight: bold;
   padding: 10px;
   border-radius: 10px;
+  cursor: pointer;
 }
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.form-group > input {
+  height: 2.5rem;
+  font-size: 1.5rem;
+  font-family: var(--primary-font-style);
+  padding: 10px;
+  font-weight: bold;
+  background-color: rgba(232, 237, 223, 0.75);
+  border-radius: 5px;
+  border: 4px solid var(--accent-color);
+}
+
+.form-group > textarea {
+  height: 20rem;
+  font-size: 1.5rem;
+  font-family: var(--primary-font-style);
+  padding: 10px;
+  font-weight: bold;
+  background-color: rgba(232, 237, 223, 0.75);
+  border-radius: 5px;
+  border: 4px solid var(--accent-color);
+}
+
+.special-text {
+  color: var(--accent-color);
+}
+
 a {
   text-decoration: none;
   color: inherit;

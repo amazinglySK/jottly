@@ -16,6 +16,7 @@ $(document).ready(() => {
     login({ username, password })
       .then((res) => {
         alert(res.message);
+        localStorage.username = res.username;
         if (res.redirect_url) {
           window.location.href = res.redirect_url;
           return;

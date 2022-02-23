@@ -13,6 +13,10 @@ router.get("/settings", (req, res) => {
   res.sendFile(path.join(__dirname, "../app/user/settings.html"));
 });
 
+router.get("/allLogs", (req, res) => {
+  res.sendFile(path.join(__dirname, "../app/user/allLogs.html"));
+});
+
 router.get("/new", (req, res) => {
   res.sendFile(path.join(__dirname, "../app/user/newLog.html"));
 });

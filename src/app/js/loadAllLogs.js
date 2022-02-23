@@ -15,18 +15,14 @@ const createLogCard = ({ link, title, desc, date }) => {
   // Basically writing a jqeury based framework at this point
   return;
 };
-
-const getLogs = async () => {
-  const response = await fetch("/logs/10");
+const getAllLogs = async () => {
+  const response = await fetch("/logs/");
   const jsonRes = await response.json();
   return jsonRes;
 };
 
 $(document).ready(() => {
-  $("#greeting").html(
-    `hello <span class = "special-text">${localStorage.username}</span>`
-  );
-  getLogs()
+  getAllLogs()
     .then((res) => {
       for (const log of res.logs) {
         createLogCard(log);

@@ -5,10 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="shortcut icon" href="/public/favicon.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="/css/global.css" />
-    <link rel="stylesheet" href="/css/login.css" />
-
-    <title>mynotes : login</title>
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/home.css" />
+    <title>mynotes : all logs</title>
   </head>
   <body>
     <header class="navbar">
@@ -16,21 +15,16 @@
         <img src="/public/logo.png" alt="" />
         <h1>mynotes</h1>
       </a>
+      <a href="/user/" class="nav-links">home</a>
+      <a href="/user/settings" class="nav-links">settings</a>
     </header>
     <main>
-      <form action="">
-        <div class="form-group">
-          <label for="username">username</label>
-          <input type="text" id="username" />
-        </div>
-        <div class="form-group">
-          <label for="password">password</label>
-          <input type="password" id="password" />
-        </div>
-      </form>
-      <button class="button-type" id="submit_btn">login</button>
+      <div class="top-container">
+        <h2>all <span class="special-text">logs</span></h2>
+      </div>
+      <div class="post-container"></div>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="/js/login.js"></script>
+    <script src="../js/loadAllLogs.js"></script>
   </body>
 </html>

@@ -7,20 +7,25 @@ require("dotenv").config();
 
 router.use(requireAuth());
 
-router.get("/", async (req, res) => {
+router.get("/:num?", async (req, res) => {
   mongoConn();
   try {
+    const num = req.params.num;
     const { user_id } = res.locals;
-    const logs = await Log.find({ author: user_id })
-      .sort({ data: -1 })
-      .limit(20);
+    if (num) {
+      var logs = await Log.find({ author: user_id })
+        .sort({ date: -1 })
+        .limit(num);
+    } else {
+      var logs = await Log.find({ author: user_id }).sort({ date: -1 });
+    }
     let log_links = [];
     for (const log of logs) {
       const post_date = new Date(log.date);
       log_links.push({
         link: `/user/log/${log.uid}`,
         title: log.title,
-        desc: `${log.content.substring(20)}...`,
+        desc: `${log.content.substring(0, 30)}...`,
         date: post_date.toLocaleDateString("en-GB"),
       });
     }

@@ -29,7 +29,11 @@ router.post("/login", async (req, res) => {
       );
       res
         .cookie("token", token, { maxAge: maxAge * 1000, httpOnly: true })
-        .json({ message: "Successful login", redirect_url: "/user/" });
+        .json({
+          message: "Successful login",
+          username: user.username,
+          redirect_url: "/user/",
+        });
       return;
     } else {
       res.json({ message: "Incorrect password" });
