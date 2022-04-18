@@ -1,6 +1,4 @@
-# 👋 mynotes
-
----
+# 👋 jottly
 
 > A simple note-taking app. (basically another diary app.. but maybe kinda neat ?)
 

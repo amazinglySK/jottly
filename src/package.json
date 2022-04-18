@@ -1,5 +1,5 @@
 {
-  "name": "mynotes",
+  "name": "jottly",
   "version": "1.0.0",
   "description": "note-taking app",
   "main": "server.js",
