@@ -26,6 +26,23 @@
       <div id="content"></div>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="../../js/getLog.js"></script>
+    <script src="../../js/logFuncs.js"></script>
+    <script>
+      $(document).ready(() => {
+        const uid = window.location.href.split("/").slice(-1)[0];
+        loadLog(uid)
+          .then((res) => {
+            $("#title").text(res.title);
+            const date = new Date(res.date);
+            $("#date").text(date.toLocaleDateString("en-GB"));
+            $("#content").text(res.content);
+            console.log("Done");
+          })
+          .catch((err) => {
+            console.log(err);
+            alert("Uh oh an error occured");
+          });
+      });
+    </script>
   </body>
 </html>

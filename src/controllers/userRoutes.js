@@ -22,7 +22,11 @@ router.get("/new", (req, res) => {
 });
 
 router.get("/log/:id?", (req, res) => {
-  res.sendFile(path.join(__dirname, "../app/user/Log.html"));
+  res.sendFile(path.join(__dirname, "../app/user/log.html"));
 });
+
+router.get("/update/:id?", (req, res) => {
+  res.sendFile(path.join(__dirname, "../app/user/logEdit.html"))
+})
 
 module.exports = router;

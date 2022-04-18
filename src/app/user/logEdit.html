@@ -32,24 +32,23 @@
       <button class="button-type" id="submit_btn">log it</button>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="../js/logFuncs.js"></script>
+    <script src="../../js/logFuncs.js"></script>
     <script>
       $(document).ready(() => {
+        const post_id = window.location.href.split("/").slice(-1)[0];
+        loadLog(post_id).then((res) => {
+          $("#title").val(res.title);
+          $("#content").val(res.content);
+          console.log("Loaded");
+        });
         $("#submit_btn").on("click", (e) => {
           e.preventDefault();
           const title = $("#title").val();
           const content = $("#content").val();
-          const date = Date.now();
-          createLog({ title, content, date })
-            .then((res) => {
-              alert(res.message);
-              if (res.redirect_url) window.location.href = res.redirect_url;
-              return;
-            })
-            .catch((err) => {
-              console.log(err);
-              alert("Uh oh an error occured");
-            });
+          updateLog(post_id).then((res) => {
+            alert(res.message);
+            if (res.redirect_url) window.location.href = res.redirect_url;
+          });
         });
       });
     </script>

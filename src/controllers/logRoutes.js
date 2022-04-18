@@ -7,10 +7,10 @@ require("dotenv").config();
 
 router.use(requireAuth());
 
-router.get("/:num?", async (req, res) => {
+router.get("/num/:num?", async (req, res) => {
   mongoConn();
   try {
-    const num = req.params.num;
+    const num = Number(req.params.num);
     const { user_id } = res.locals;
     if (num) {
       var logs = await Log.find({ author: user_id })
@@ -24,6 +24,7 @@ router.get("/:num?", async (req, res) => {
       const post_date = new Date(log.date);
       log_links.push({
         link: `/user/log/${log.uid}`,
+        post_id: log.uid,
         title: log.title,
         desc: `${log.content.substring(0, 30)}...`,
         date: post_date.toLocaleDateString("en-GB"),
@@ -62,6 +63,35 @@ router.post("/new", async (req, res) => {
       message: "Successfully created the log.",
       redirect_url: "/user/",
       post_id: savedLog.uid,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Oops and error occured" });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    const uid = req.params.id;
+    await Log.deleteOne({ uid });
+    res.json({
+      message: "Successfully deleted the log",
+      redirect_url: "/user/",
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Oops and error occured" });
+  }
+});
+
+router.put("/:id", async (req, res) => {
+  try {
+    const uid = req.params.id;
+    const { title, content } = req.body;
+    await Log.updateOne({ uid }, { title, content });
+    res.json({
+      message: "Successfully updated the log",
+      redirect_url: "/user/",
     });
   } catch (err) {
     console.log(err);

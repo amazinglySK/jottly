@@ -4,6 +4,7 @@ const jwt = require("jsonwebtoken");
 const router = express.Router();
 const mongoConn = require("../lib/mongoConn");
 const User = require("../models/User");
+const { requireAuth } = require("../middlewares/authController");
 require("dotenv").config();
 
 const maxAge = 3 * 60 * 60;
@@ -62,6 +63,28 @@ router.post("/signup", async (req, res) => {
   } catch (err) {
     console.log(err);
     res.json({ message: "something went wrong" });
+  }
+});
+
+router.put("/chpwd", requireAuth, async (req, res) => {
+  mongoConn();
+  try {
+    const { user_id } = res.locals;
+    const { current_password, new_password } = req.body;
+    const user = await User.findOne({ _id: user_id });
+    const check = await bcrypt.compare(current_password, user.password);
+    if (check) {
+      const new_hash = bcrypt.hash(new_password, 10);
+      user.password = new_hash;
+      await user.save();
+    }
+    res.json({
+      message: "Password updated successfully",
+      redirect_url: "/login",
+    });
+  } catch (err) {
+    console.log(err);
+    res.json({ message: "Something went wrong" });
   }
 });
 
