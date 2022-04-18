@@ -26,7 +26,11 @@ router.get("/log/:id?", (req, res) => {
 });
 
 router.get("/update/:id?", (req, res) => {
-  res.sendFile(path.join(__dirname, "../app/user/logEdit.html"))
-})
+  res.sendFile(path.join(__dirname, "../app/user/logEdit.html"));
+});
+
+router.get("/logout", (req, res) => {
+  res.clearCookie("token").redirect("/");
+});
 
 module.exports = router;
