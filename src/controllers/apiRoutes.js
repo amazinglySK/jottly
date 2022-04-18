@@ -9,6 +9,8 @@ require("dotenv").config();
 
 const maxAge = 3 * 60 * 60;
 
+router.use(express.json());
+
 router.post("/login", async (req, res) => {
   mongoConn();
   try {
@@ -66,19 +68,23 @@ router.post("/signup", async (req, res) => {
   }
 });
 
-router.put("/chpwd", requireAuth, async (req, res) => {
+router.put("/chpwd", requireAuth(), async (req, res) => {
   mongoConn();
   try {
     const { user_id } = res.locals;
     const { current_password, new_password } = req.body;
+    console.log(current_password);
+    console.log(new_password);
     const user = await User.findOne({ _id: user_id });
     const check = await bcrypt.compare(current_password, user.password);
-    if (check) {
-      const new_hash = bcrypt.hash(new_password, 10);
-      user.password = new_hash;
-      await user.save();
+    if (!check) {
+      res.json({ message: "The password given was incorrect" });
+      return;
     }
-    res.json({
+    const new_hash = await bcrypt.hash(new_password, 10);
+    user.password = new_hash;
+    await user.save();
+    res.clearCookie("token").json({
       message: "Password updated successfully",
       redirect_url: "/login",
     });
