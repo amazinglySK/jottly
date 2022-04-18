@@ -73,8 +73,6 @@ router.put("/chpwd", requireAuth(), async (req, res) => {
   try {
     const { user_id } = res.locals;
     const { current_password, new_password } = req.body;
-    console.log(current_password);
-    console.log(new_password);
     const user = await User.findOne({ _id: user_id });
     const check = await bcrypt.compare(current_password, user.password);
     if (!check) {
