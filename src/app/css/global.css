@@ -71,6 +71,7 @@ main {
   text-align: center;
   padding: 0 2rem;
   font-weight: bold;
+  width: 80%;
 }
 .button-type {
   text-align: center;
@@ -142,7 +143,7 @@ a {
     justify-content: center;
     padding: 10px;
   }
-  nav {
+  .links-container {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
