@@ -47,6 +47,20 @@ router.post("/login", async (req, res) => {
     res.json({ message: "something went wrong" });
   }
 });
+
+router.get("/user", requireAuth(), async (req, res) => {
+  mongoConn();
+  try {
+    const { user_id } = res.locals;
+    const user = await User.findOne({ _id: user_id });
+    const { username, bio } = user;
+    res.json({ username, bio });
+  } catch (err) {
+    console.log(err);
+    res.json({ message: "something went wrong" });
+  }
+});
+
 router.post("/signup", async (req, res) => {
   mongoConn();
   const { name, username, password, email } = req.body;

@@ -3,10 +3,10 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const app = express();
 const PORT = process.env.PORT || 5500;
-const mainRoutes = require("./controllers/mainRoutes");
-const userRoutes = require("./controllers/userRoutes");
-const apiRoutes = require("./controllers/apiRoutes");
-const logRouter = require("./controllers/logRoutes");
+const mainRoutes = require("./routes/mainRoutes");
+const userRoutes = require("./routes/userRoutes");
+const apiRoutes = require("./routes/apiRoutes");
+const logRouter = require("./routes/logRoutes");
 
 app.use(express.static(path.join(__dirname, "/app")));
 app.use(cookieParser());

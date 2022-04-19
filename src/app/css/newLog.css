@@ -3,7 +3,6 @@ form {
 }
 
 textarea {
-  resize: none;
   font-size: 1.8rem;
   font-weight: 400 !important;
   height: 25rem !important;

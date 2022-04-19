@@ -16,6 +16,8 @@
         <h1>jottly</h1>
       </a>
       <a href="/user/" class="nav-links">home</a>
+      <a href="/user/settings" class="nav-links">settings</a>
+      <a href="/user/logout" class="nav-links">logout</a>
     </header>
     <main>
       <form>
@@ -40,11 +42,25 @@
         </div>
         <div class="form-group">
           <label for="bio">bio</label>
-          <textarea type="text" id="bio"></textarea>
+          <textarea id="bio"></textarea>
         </div>
       </form>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+      $(document).ready(() => {
+        fetch("/api/user")
+          .then((res) => res.json())
+          .then(({ username, bio }) => {
+            $("#username").val(username);
+            $("#bio").val(bio);
+          })
+          .catch((err) => {
+            console.log(err);
+            alert("Somethign went wrong");
+          });
+      });
+    </script>
     <script src="../js/chPwd.js"></script>
   </body>
 </html>

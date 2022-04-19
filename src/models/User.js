@@ -5,6 +5,7 @@ const UserSchema = mongoose.Schema({
   name: String,
   username: String,
   password: String,
+  bio: { type: String, default: "" },
   email: {
     type: String,
     validate: [isEmail, "Incorrect email provided"],
