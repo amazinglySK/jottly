@@ -28,6 +28,9 @@
         <a href="/user/logout" class="nav-links">logout</a>
       </nav>
     </header>
+    <div class="fallback-screen">
+      <img src="/public/loader.svg" alt="" class="loader" />
+    </div>
     <main>
       <div class="top-container">
         <h2 id="greeting"></h2>
@@ -37,11 +40,13 @@
       <a class="button-type" href="/user/allLogs">get all logs</a>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="../js/loader.js"></script>
     <script src="../js/logFuncs.js"></script>
     <script>
       $("#greeting").html(
         `hello <span class = "special-text">${localStorage.username}</span>`
       );
+      loaderOn();
       loadLogs(10)
         .then((res) => {
           for (const log of res.logs) {
@@ -52,8 +57,12 @@
         .catch((err) => {
           console.log(err);
           alert("An error occured");
+        })
+        .finally(() => {
+          loaderOff();
         });
       const handle_trash_click = (post_id) => {
+        if (!confirm("Do you want to delete this post ?")) return;
         deleteLog(post_id)
           .then((res) => {
             console.log(res.message);

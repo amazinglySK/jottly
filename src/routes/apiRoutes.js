@@ -61,6 +61,30 @@ router.get("/user", requireAuth(), async (req, res) => {
   }
 });
 
+router.put("/user/:field", requireAuth(), async (req, res) => {
+  mongoConn();
+  try {
+    const { user_id } = res.locals;
+    const field = req.params.field;
+    console.log(field);
+    if (field == "username") {
+      const { username } = req.body;
+      await User.updateOne({ _id: user_id }, { username });
+    } else if (field == "bio") {
+      const { bio } = req.body;
+      await User.updateOne({ _id: user_id }, { bio });
+    } else {
+      res.json({ message: `are you playing with us ?` });
+      return;
+    }
+    res.json({ message: `updated ${field} successfully` });
+    return;
+  } catch (err) {
+    console.log(err);
+    res.json({ message: "something went wrong" });
+  }
+});
+
 router.post("/signup", async (req, res) => {
   mongoConn();
   const { name, username, password, email } = req.body;

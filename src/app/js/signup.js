@@ -11,6 +11,7 @@ const signup = async (data) => {
 $(document).ready(() => {
   $("#submit_btn").on("click", (e) => {
     e.preventDefault();
+    loaderOn();
     const name = $("#name").val();
     const username = $("#username").val();
     const password = $("#password").val();
@@ -37,6 +38,9 @@ $(document).ready(() => {
       .catch((err) => {
         console.log(err);
         alert("An error occured");
+      })
+      .finally(() => {
+        loaderOff();
       });
   });
 });

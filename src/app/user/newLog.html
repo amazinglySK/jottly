@@ -21,6 +21,9 @@
         <a href="/user/logout" class="nav-links">logout</a>
       </nav>
     </header>
+    <div class="fallback-screen">
+      <img src="/public/loader.svg" alt="" class="loader" />
+    </div>
     <main>
       <form>
         <div class="form-group">
@@ -36,6 +39,7 @@
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="../js/logFuncs.js"></script>
+    <script src="../js/loader.js"></script>
     <script>
       $(document).ready(() => {
         $("#submit_btn").on("click", (e) => {
