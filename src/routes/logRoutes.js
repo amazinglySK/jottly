@@ -3,7 +3,7 @@ const router = express.Router();
 const mongoConn = require("../lib/mongoConn");
 const Log = require("../models/Log");
 const { requireAuth } = require("../middlewares/authController");
-require("dotenv").config();
+// require("dotenv").config();
 
 router.use(requireAuth());
 
