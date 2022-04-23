@@ -153,15 +153,10 @@ a {
     font-size: 90%;
   }
   .navbar {
-    color: var(--accent-color);
-    max-width: 80%;
-    margin: 2rem auto;
-    display: flex;
     flex-direction: column;
     gap: 0.5rem;
     align-items: center;
     justify-content: center;
-    padding: 10px;
   }
   .links-container {
     display: flex;

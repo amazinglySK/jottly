@@ -7,3 +7,9 @@ textarea {
   font-weight: 400 !important;
   height: 25rem !important;
 }
+
+@media screen and (max-width: 800px) {
+  form {
+    width: 80%;
+  }
+}
