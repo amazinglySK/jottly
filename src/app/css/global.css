@@ -158,6 +158,9 @@ a {
     align-items: center;
     justify-content: center;
   }
+  .nav-links {
+    margin: 0;
+  }
   .links-container {
     display: flex;
     flex-direction: column;
