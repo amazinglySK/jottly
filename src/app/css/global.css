@@ -97,13 +97,18 @@ main {
   text-align: center;
   font-family: var(--primary-font-style);
   font-size: 1.5rem;
-  background-color: var(--accent-color);
+  background-color: #333533;
   color: var(--button-text-color);
   font-weight: bold;
   padding: 10px;
   border-radius: 10px;
-  border: none;
+  border: 2px solid var(--accent-color);
+  transition: all ease-in-out 0.25s;
   cursor: pointer;
+}
+
+.button-type:hover {
+  background-color: var(--accent-color);
 }
 
 .form-group {
