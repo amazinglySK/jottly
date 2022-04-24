@@ -62,7 +62,7 @@
           e.preventDefault();
           const title = $("#title").val();
           const content = $("#content").val();
-          updateLog(post_id, title, content)
+          updateLog(post_id, content, title)
             .then((res) => {
               alert(res.message);
               loaderOff();
