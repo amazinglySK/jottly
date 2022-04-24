@@ -37,6 +37,7 @@
     <script>
       $(document).ready(() => {
         const uid = window.location.href.split("/").slice(-1)[0];
+        loaderOn();
         loadLog(uid)
           .then((res) => {
             $("#title").text(res.title);
@@ -48,6 +49,9 @@
           .catch((err) => {
             console.log(err);
             alert("Uh oh an error occured");
+          })
+          .finally(() => {
+            loaderOff();
           });
       });
     </script>

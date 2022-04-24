@@ -41,17 +41,21 @@
     <script src="../js/loader.js"></script>
     <script src="../js/logFuncs.js"></script>
     <script>
-      loadLogs()
-        .then((res) => {
-          for (const log of res.logs) {
-            createLogCard(log);
-          }
-          return;
-        })
-        .catch((err) => {
-          console.log(err);
-          alert("An error occured");
-        });
+      $(document).ready(() => {
+        loaderOn();
+        loadLogs()
+          .then((res) => {
+            for (const log of res.logs) {
+              createLogCard(log);
+            }
+            return;
+          })
+          .catch((err) => {
+            console.log(err);
+            alert("An error occured");
+          })
+          .finally(() => loaderOff());
+      });
     </script>
   </body>
 </html>

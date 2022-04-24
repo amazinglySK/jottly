@@ -3,5 +3,5 @@ const loaderOn = () => {
 };
 
 const loaderOff = () => {
-  setTimeout(() => $(".fallback-screen").css("visibility", "hidden"), "2000");
+  setTimeout(() => $(".fallback-screen").css("visibility", "hidden"), "1000");
 };

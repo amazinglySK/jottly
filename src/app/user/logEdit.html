@@ -43,19 +43,38 @@
     <script>
       $(document).ready(() => {
         const post_id = window.location.href.split("/").slice(-1)[0];
-        loadLog(post_id).then((res) => {
-          $("#title").val(res.title);
-          $("#content").val(res.content);
-          console.log("Loaded");
-        });
+        loaderOn();
+        loadLog(post_id)
+          .then((res) => {
+            $("#title").val(res.title);
+            $("#content").val(res.content);
+            console.log("Loaded");
+          })
+          .catch((err) => {
+            console.log(err);
+            alert("something went wrong");
+          })
+          .finally(() => {
+            loaderOff();
+          });
         $("#submit_btn").on("click", (e) => {
+          loaderOn();
           e.preventDefault();
           const title = $("#title").val();
           const content = $("#content").val();
-          updateLog(post_id).then((res) => {
-            alert(res.message);
-            if (res.redirect_url) window.location.href = res.redirect_url;
-          });
+          updateLog(post_id)
+            .then((res) => {
+              alert(res.message);
+              loaderOff();
+              if (res.redirect_url) window.location.href = res.redirect_url;
+            })
+            .catch((err) => {
+              console.log(err);
+              alert("something went wrong");
+            })
+            .finally(() => {
+              loaderOff();
+            });
         });
       });
     </script>
