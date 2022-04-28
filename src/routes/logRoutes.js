@@ -3,7 +3,12 @@ const router = express.Router();
 const mongoConn = require("../lib/mongoConn");
 const Log = require("../models/Log");
 const { requireAuth } = require("../middlewares/authController");
-// require("dotenv").config();
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  require("dotenv").config();
+}
+
+const Cryptr = require("cryptr");
+const cryptr = new Cryptr(process.env.ENCRYPT_SECRET);
 
 router.use(requireAuth());
 
@@ -26,7 +31,7 @@ router.get("/num/:num?", async (req, res) => {
         link: `/user/log/${log.uid}`,
         post_id: log.uid,
         title: log.title,
-        desc: `${log.content.substring(0, 30)}...`,
+        desc: `${cryptr.decrypt(log.content).substring(0, 30)}...`,
         date: post_date.toLocaleDateString("en-GB"),
       });
     }
@@ -46,7 +51,7 @@ router.get("/:id", async (req, res) => {
       return;
     }
     const { title, content, date } = log;
-    res.json({ title, content, date });
+    res.json({ title, content: cryptr.decrypt(content), date });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Something went wrong" });
@@ -57,7 +62,8 @@ router.post("/new", async (req, res) => {
   try {
     const { title, content, date } = req.body;
     const author = res.locals.user_id;
-    const newLog = new Log({ title, content, author, date });
+    const encryptedContent = cryptr.encrypt(content);
+    const newLog = new Log({ title, content: encryptedContent, author, date });
     const savedLog = await newLog.save();
     res.json({
       message: "Successfully created the log.",
