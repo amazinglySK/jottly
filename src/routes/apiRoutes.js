@@ -5,7 +5,9 @@ const router = express.Router();
 const mongoConn = require("../lib/mongoConn");
 const User = require("../models/User");
 const { requireAuth } = require("../middlewares/authController");
-// require("dotenv").config();
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  require("dotenv").config();
+}
 
 const maxAge = 3 * 60 * 60;
 
