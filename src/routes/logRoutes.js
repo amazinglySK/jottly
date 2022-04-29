@@ -94,7 +94,7 @@ router.put("/:id", async (req, res) => {
   try {
     const uid = req.params.id;
     const { title, content } = req.body;
-    await Log.updateOne({ uid }, { title, content });
+    await Log.updateOne({ uid }, { title, content: cryptr.encrypt(content) });
     res.json({
       message: "Successfully updated the log",
       redirect_url: "/user/",
