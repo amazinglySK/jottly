@@ -18,4 +18,47 @@
 #content {
   font-size: 1.5rem;
   font-weight: 500;
+  width: 100%;
+}
+
+/*markdown styles*/
+hr {
+  margin: 1em 0;
+  border: 0;
+  border-bottom: 1px solid #ccc;
+}
+blockquote {
+  margin-left: 0;
+  padding: 0.5em 0 0.5em 2em;
+  border-left: 3px solid rgb(211, 218, 234);
+}
+li,
+code {
+  margin: 0.4em 0;
+}
+p {
+  margin: 0.9em 0;
+}
+code {
+  background: rgba(211, 218, 234, 0.25);
+}
+pre > code {
+  display: block;
+  padding: 0.5em 4em;
+}
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+td {
+  padding: 4px 8px;
+}
+tr:nth-child(2n) {
+  background: #f3f3f3;
+}
+th {
+  border-bottom: 1px solid #aaa;
+}
+img {
+  max-width: 96px;
 }
