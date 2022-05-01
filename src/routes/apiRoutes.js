@@ -5,9 +5,9 @@ const router = express.Router();
 const mongoConn = require("../lib/mongoConn");
 const User = require("../models/User");
 const { requireAuth } = require("../middlewares/authController");
-// if (process.env.NODE_ENV !== "PRODUCTION") {
-//   require("dotenv").config();
-// }
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 
 const maxAge = 3 * 60 * 60;
 
@@ -90,7 +90,7 @@ router.post("/signup", async (req, res) => {
   mongoConn();
   const { name, username, password, email } = req.body;
   try {
-    const checkExistingUser = await User.findOne({ username, email });
+    const checkExistingUser = await User.findOne({ email });
     if (checkExistingUser) {
       res.json({
         message: "You already have an account under these credentials",
