@@ -3,9 +3,9 @@ const router = express.Router();
 const mongoConn = require("../lib/mongoConn");
 const Log = require("../models/Log");
 const { requireAuth } = require("../middlewares/authController");
-if (process.env.NODE_ENV !== "PRODUCTION") {
-  require("dotenv").config();
-}
+// if (process.env.NODE_ENV !== "PRODUCTION") {
+//   require("dotenv").config();
+// }
 
 const Cryptr = require("cryptr");
 const cryptr = new Cryptr(process.env.ENCRYPT_SECRET);
