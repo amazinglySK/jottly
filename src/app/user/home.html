@@ -61,7 +61,7 @@
         `hello <span class = "special-text">${localStorage.username}</span>`
       );
       loaderOn();
-      loadLogs(10)
+      loadLogs(6)
         .then((res) => {
           for (const log of res.logs) {
             createLogCard(log);
