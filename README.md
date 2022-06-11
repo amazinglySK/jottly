@@ -1,6 +1,4 @@
-<img src = "./imgs/main.png"/>
-
-<h1 align="center">👋 jottly</h1>
+<img src = "./src/app/public/ogimg.png">
 
 > A simple note-taking app. (basically another diary app.. but maybe kinda neat ?)
 
@@ -16,6 +14,7 @@ simple enough right? (_yes_)
 ## preview
 
 <div style = "display : flex; flex-direction : column; gap : 2rem;">
+<img src = "./imgs/main.png"/>
 <img src = "./imgs/login.png"/>
 <img src = "./imgs/dashboard.png"/>
 <img src = "./imgs/new_note.png"/>
