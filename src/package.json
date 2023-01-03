@@ -12,7 +12,7 @@
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.6",
     "cryptr": "^6.0.3",
-    "express": "^4.17.2",
+    "express": "^4.17.3",
     "express-rate-limit": "^6.4.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.4.6",
